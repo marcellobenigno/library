@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Autor - Mais informações</h1>
+            <hr>
+            <div class="desc">
+                <dl>
+                    <dt>NOME:</dt>
+                    <dd>{{ author.name }}</dd>
+                </dl>
+                <strong>FONTE: </strong><a href="#">Google</a>
+            </div>
+            <hr>
+            {% include 'includes/links_details.html' with pk=author.pk list='core:author_list' edit='core:author_edit' delete='core:author_delete' %}
+        </div><!-- col-md-12 -->
+    </div><!-- row -->
+
+{% endblock content %}

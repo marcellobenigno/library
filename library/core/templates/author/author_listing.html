@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h1>Autores</h1>
+            <hr>
+
+            {% include 'includes/add_button.html' with link='core:author_add' %}
+
+            <!-- search form -->
+            <form class="navbar-form navbar-right" action="." method="get">
+
+                <input id="search_box" name="search_box" type="text" placeholder="Pesquisar pelo nome"
+                       class="form-control">
+
+                <button type="submit" class="btn btn-primary form-control">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+
+                {% if result %}
+                    <a class="btn btn-primary btn-success" href="{% url 'core:author_list' %}" role="button">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true" title="Resetar"></span>
+                    </a>
+                {% endif %}
+
+            </form>
+
+            {% if result %}
+                <h3 class="text-success">Resultado da busca: {{ result }} registro(s) com o nome
+                    <strong>{{ selection }}</strong></h3>
+            {% endif %}
+
+        </div><!-- col-md-12 -->
+
+        <div class="col-md-12 TbMargin">
+
+            {% bootstrap_messages %}
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome da Autor</th>
+                    <th>Obras Literárias</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in authors_list %}
+                    <tr>
+                        <th>{{ forloop.counter }}</th>
+                        <td>{{ obj.name }}</td>
+                        <td>
+                            {% for book in obj.book_set.all %}
+                                {{ book.title }} {{ forloop.last|yesno:", - " }}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% include 'includes/actions.html' with pk=obj.pk detail='core:author_detail' edit='core:author_edit' delete='core:author_delete' %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div><!-- col-md-12 -->
+    </div><!-- row -->
+
+{% endblock content %}
+
+{% block extras_js %}
+    <script type="text/javascript">
+        $(".alert").show().delay(3000).fadeOut();
+    </script>
+{% endblock %}
