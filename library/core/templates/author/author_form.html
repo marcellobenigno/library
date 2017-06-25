@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -11,14 +11,56 @@
 
             <form action="." method="post" class="form">
                 {% csrf_token %}
-                {% bootstrap_form form %}
-                {% buttons %}
-                    <button type="submit" class="btn btn-primary">Enviar
-                    </button>
-                {% endbuttons %}
+                {{ form|crispy }}
+                {{ formset.management_form }}
+
+                <legend>Livros</legend>
+
+                <div id="elemen" class="form-group">
+                    {% for item in formset %}
+                        <div id="item-{{ forloop.counter0 }}">
+                            {{ item|crispy }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <a class="btn btn-info" id="add-item">Adicionar Item</a>
+
+                <div class="form-inline buttons">
+                    <button class="btn btn-primary pull-right" value="Save">Salvar</button>
+                </div>
+
             </form>
 
         </div><!-- col-md-12 -->
     </div><!-- row -->
 
 {% endblock content %}
+
+{% block extras_js %}
+    <script>
+        $(document).ready(function () {
+            $("#add-item").click(function (ev) {
+                ev.preventDefault();
+                var count = $('#elemen').children().length;
+                var tmplMarkup = $("#item-elemen").html();
+                var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
+                $("div#elemen").append(compiledTmpl);
+
+                // update form count
+                $('#id_book-TOTAL_FORMS').attr('value', count + 1);
+
+                // some animate to scroll to view our new form
+                $('html, body').animate({
+                    scrollTop: $("#add-item").position().top - 200
+                }, 800);
+            });
+        });
+    </script>
+
+    <script type="text/html" id="item-elemen">
+        <div id="item-__prefix__" style="margin-top: 10px">
+            {{ formset.empty_form|crispy }}
+        </div>
+    </script>
+{% endblock extras_js %}

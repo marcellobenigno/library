@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Author, Book
-from .forms import AuthorModelForm
+
+from .forms import AuthorModelForm, BookFormSet
+from .models import Author
 
 
 def home(request):
@@ -18,25 +19,30 @@ def author_list(request):
     context = {
         'authors_list': authors_list,
     }
-
     return render(request, 'author/author_listing.html', context)
 
 
 def author_create(request):
     title = "Criar Novo Autor"
-    form = AuthorModelForm(request.POST or None)
+    author_form = AuthorModelForm(request.POST or None)
+    author = Author()
+    formset = BookFormSet(request.POST or None, instance=author, prefix='book')
 
-    if form.is_valid():
-        form.save()
+    if author_form.is_valid():
+        created_author = author_form.save(commit=False)
+        formset = BookFormSet(request.POST, instance=created_author, prefix='book')
+        if formset.is_valid():
+            created_author.save()
+            formset.save()
         messages.success(request,
                          'Autor cadastrado com sucesso!')
         return redirect('core:author_list')
 
     context = {
         'title': title,
-        'form': form
+        'form': author_form,
+        'formset': formset,
     }
-
     return render(request, 'author/author_form.html', context)
 
 
@@ -48,19 +54,24 @@ def author_detail(request, pk):
 def author_edit(request, pk):
     title = "Editar Autor"
     author = get_object_or_404(Author, pk=pk)
-    form = AuthorModelForm(request.POST or None, instance=author)
+    author_form = AuthorModelForm(request.POST or None, instance=author)
+    formset = BookFormSet(request.POST or None, instance=author, prefix='book')
 
-    if form.is_valid():
-        form.save()
+    if author_form.is_valid():
+        created_author = author_form.save(commit=False)
+        formset = BookFormSet(request.POST, instance=created_author, prefix='book')
+        if formset.is_valid():
+            created_author.save()
+            formset.save()
         messages.success(request,
-                         'Autor editado com sucesso!')
+                         'Autor cadastrado com sucesso!')
         return redirect('core:author_list')
 
     context = {
         'title': title,
-        'form': form
+        'form': author_form,
+        'formset': formset,
     }
-
     return render(request, 'author/author_form.html', context)
 
 

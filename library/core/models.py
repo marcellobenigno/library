@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Author(models.Model):
-    name = models.CharField('nome', max_length=100)
+    name = models.CharField('nome', max_length=100, unique=True)
 
     class Meta:
         verbose_name = 'autor'

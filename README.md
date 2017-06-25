@@ -1,6 +1,7 @@
 # Biblioteca Django Bootstrap
 
-**Biblioteca Django** é um projeto que visa experimentar, explorar e colocar em práticas os recursos do  Django
+**Biblioteca Django** é um projeto que visa experimentar, explorar e colocar em práticas os 
+recursos do  Django com o Twitter Bootstrap.
 
 ## Como desenvolver?
 
@@ -14,9 +15,9 @@
 * Execute os testes.
 
 ```console
+mkdir library_src && cd library_src
 git clone https://github.com/marcellobenigno/library.git
 createdb library
-mkdir library_src && cd library_src
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements/dev.txt
