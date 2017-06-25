@@ -1,2 +1,6 @@
-servicos_publicos/core/static/* linguist-vendored
-servicos_publicos/core/templates/* linguist-vendored
+*html text eol=lf
+*css text eol=lf
+*js text eol=lf
+
+servicos_publicos/core/static/* linguist-vendored text eol=lf
+servicos_publicos/core/templates/* linguist-vendored text eol=lf
