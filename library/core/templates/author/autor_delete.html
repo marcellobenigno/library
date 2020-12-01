@@ -1,34 +1,33 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block content %}
 
     <div class="row">
         <div class="col-md-12">
 
-            <h1>Apagar Autor</h1>
+            <h2 class="mt-4"><i class="fa fa-trash"></i> Remover Autor</h2>
             <hr>
 
-            <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="danger" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                Cuidado! Esta ação eliminará este registro do sistema.
+                Cuidado! Esta ação removerá este registro do sistema.
             </div>
 
             <form method="post">
                 {% csrf_token %}
                 <p>Tem certeza que você quer deletar o autor <strong>{{ author.name }}</strong> ?</p>
                 {% buttons %}
-                    <button type="submit" class="btn btn-warning">Deletar</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-trash"></i> Deletar
+                    </button>
                 {% endbuttons %}
             </form>
 
             <hr>
-            <a href="{% url 'core:author_list' %}" class="btn btn-primary btn-sm" role="button">
-                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true" title="Voltar"></span>
-            </a>
-            <a href="{% url 'core:author_edit' author.pk %}" class="btn btn-primary btn-sm" role="button">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Editar"></span>
+            <a href="{% url 'core:author_list' %}" class="btn btn-primary" role="button">
+                <i class="fa fa-arrow-left"></i>
             </a>
 
         </div><!-- col-md-12 -->

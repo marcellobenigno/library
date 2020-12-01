@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     # third apps:
     'django_activeurl',
     'crispy_forms',
-    'bootstrap3',
+    'bootstrap4',
     # my apps:
     'library.core',
 ]

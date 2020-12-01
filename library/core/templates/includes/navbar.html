@@ -1,26 +1,23 @@
 {% load activeurl %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'core:home' %}"> <i class="fa fa-book"></i> Biblioteca</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'core:home' %}">Biblioteca</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            {% activeurl %}
-                <ul class="nav navbar-nav">
-                    <li><a href="{% url 'core:home' %}">Início</a></li>
-                    <li><a href="{% url 'core:author_list' %}">Autores</a></li>
-                    <li><a href="#">Livros</a></li>
-                </ul>
-            {% endactiveurl %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% activeurl %}
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:home' %}"> <i class="fa fa-home"></i> Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:author_list' %}"> <i class="fa fa-users"></i>
+                        Autores</a>
+                </li>
+            </ul>
+        {% endactiveurl %}
 
-        </div><!--/.nav-collapse -->
     </div>
 </nav>

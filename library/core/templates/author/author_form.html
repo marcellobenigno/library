@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <h1>{{ title }}</h1>
+            <h2 class="mt-4"><i class="fa fa-plus-circle"></i> {{ title }}</h2>
             <hr>
 
             <form action="." method="post" class="form">
@@ -14,6 +14,7 @@
                 {{ form|crispy }}
                 {{ formset.management_form }}
 
+                <hr>
                 <legend>Livros</legend>
 
                 <div id="elemen" class="form-group">
@@ -24,10 +25,16 @@
                     {% endfor %}
                 </div>
 
-                <a class="btn btn-info" id="add-item">Adicionar Item</a>
-
+                <p class="text-right">
+                    <a class="btn btn-info" id="add-item">
+                        <i class="fa fa-book"></i> Adicionar Livro
+                    </a>
+                </p>
                 <div class="form-inline buttons">
-                    <button class="btn btn-primary pull-right" value="Save">Salvar</button>
+                    <button class="btn btn-primary pull-right" value="Save">
+                        <i class="fa fa-save"></i>
+                        Salvar
+                    </button>
                 </div>
 
             </form>

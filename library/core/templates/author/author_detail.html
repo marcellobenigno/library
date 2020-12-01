@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block content %}
 
     <div class="row">
         <div class="col-md-12">
-            <h1>Autor - Mais informações</h1>
+            <h2 class="mt-4"><i class="fa fa-user"></i> Autor - Mais informações</h2>
             <hr>
             <div class="desc">
                 <dl>
                     <dt>NOME:</dt>
                     <dd>{{ author.name }}</dd>
+                    <dt>LIVROS:</dt>
+                    <ul>
+                        {% for book in author.book_set.all %}
+                            <li>{{ book }}</li>
+                        {% endfor %}
+                    </ul>
                 </dl>
                 <strong>FONTE: </strong><a href="#">Google</a>
             </div>

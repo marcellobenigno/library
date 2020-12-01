@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block content %}
 
     <div class="row">
         <div class="col-md-12">
 
-            <h1>Autores</h1>
+            <h2 class="mt-4"><i class="fa fa-users"></i> Autores</h2>
             <hr>
 
             {% include 'includes/add_button.html' with link='core:author_add' %}
@@ -14,39 +14,46 @@
             <!-- search form -->
             <form class="navbar-form navbar-right" action="." method="get">
 
-                <input id="search_box" name="search_box" type="text" placeholder="Pesquisar pelo nome"
-                       class="form-control">
-
-                <button type="submit" class="btn btn-primary form-control">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-
-                {% if result %}
-                    <a class="btn btn-primary btn-success" href="{% url 'core:author_list' %}" role="button">
-                        <span class="glyphicon glyphicon-refresh" aria-hidden="true" title="Resetar"></span>
-                    </a>
-                {% endif %}
-
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group mb-2">
+                            <input type="text" class="form-control" id="search_box" name="search_box"
+                                  value="{{ selection|default:'' }}" placeholder="Pesquisar pelo nome">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary mb-2 btn-block"><i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        {% if selection %}
+                            <a class="btn btn-success mb-2 btn-block" href="{% url 'core:author_list' %}" role="button">
+                                <i class="fa fa-undo"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
             </form>
 
-            {% if result %}
-                <h3 class="text-success">Resultado da busca: {{ result }} registro(s) com o nome
-                    <strong>{{ selection }}</strong></h3>
+            {% if selection %}
+                <h3 class="text-success mt-2">
+                    Resultado da busca com o nome
+                    <strong>{{ selection }}</strong>:</h3>
             {% endif %}
 
         </div><!-- col-md-12 -->
 
-        <div class="col-md-12 TbMargin">
+        <div class="col-md-12 mt-4">
 
             {% bootstrap_messages %}
 
-            <table class="table table-hover">
-                <thead>
+            <table class="table table-hover table-striped table-bordered">
+                <thead class="thead-light">
                 <tr>
-                    <th>#</th>
-                    <th>Nome da Autor</th>
-                    <th>Livros</th>
-                    <th>Ações</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome do Autor</th>
+                    <th scope="col">Livros</th>
+                    <th scope="col">Ações</th>
                 </tr>
                 </thead>
                 <tbody>

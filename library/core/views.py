@@ -18,12 +18,13 @@ def author_list(request):
 
     context = {
         'authors_list': authors_list,
+        'selection': selection
     }
     return render(request, 'author/author_listing.html', context)
 
 
 def author_create(request):
-    title = "Criar Novo Autor"
+    title = "Adicionar Autor"
     author_form = AuthorModelForm(request.POST or None)
     author = Author()
     formset = BookFormSet(request.POST or None, instance=author, prefix='book')
