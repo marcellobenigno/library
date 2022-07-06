@@ -7,7 +7,7 @@ django-appconf==1.0.4
 django-bootstrap4==2.3.1
 django-classy-tags==2.0.0
 django-crispy-forms==1.10.0
-lxml==4.6.2
+lxml==4.9.1
 psycopg2-binary==2.8.6
 python-decouple==3.3
 pytz==2020.4
